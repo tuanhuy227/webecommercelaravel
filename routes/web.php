@@ -15,6 +15,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'App\Http\Controllers\HomeController@index');
 Route::get('/trang-chu', 'App\Http\Controllers\HomeController@index');
+Route::get('/tim_kiem', 'App\Http\Controllers\HomeController@search');
+
+//danh muc san pham
+Route::get('/danh_muc_san_pham/{category_id}', 'App\Http\Controllers\CategoryProductController@show_category_home');
+Route::get('/chi_tiet_san_pham/{product_id}', 'App\Http\Controllers\ProductController@detail_product');
+Route::get('/thuong_hieu_san_pham/{brand_id}', 'App\Http\Controllers\CategoryProductController@show_brand_home');
 
 Route::get('/admin', 'App\Http\Controllers\AdminController@index');
 Route::get('/logout', 'App\Http\Controllers\AdminController@log_out');
@@ -55,3 +61,23 @@ Route::get('/active_product/{product_id}', 'App\Http\Controllers\ProductControll
 Route::get('/unactive_product/{product_id}', 'App\Http\Controllers\ProductController@unactive_product');
 
 Route::post('/update_product/{product_id}', 'App\Http\Controllers\ProductController@update_product');
+//cart
+
+Route::post('/save_cart', 'App\Http\Controllers\CartController@save_cart');
+Route::get('/show_cart', 'App\Http\Controllers\CartController@show_cart');
+Route::get('/delete_to_cart/{rowId}', 'App\Http\Controllers\CartController@delete_to_cart');
+Route::post('/update_cart_quantity', 'App\Http\Controllers\CartController@update_cart_quantity');
+Route::get('/login_checkout', 'App\Http\Controllers\CheckoutController@login_checkout');
+Route::get('/logout_checkout', 'App\Http\Controllers\CheckoutController@logout_checkout');
+
+
+Route::post('/add_customer', 'App\Http\Controllers\CheckoutController@add_customer');
+Route::get('/checkout', 'App\Http\Controllers\CheckoutController@checkout');
+Route::post('/order_place', 'App\Http\Controllers\CheckoutController@order_place');
+Route::post('/save_checkout_customer', 'App\Http\Controllers\CheckoutController@save_checkout_customer');
+Route::post('/login_customer', 'App\Http\Controllers\CheckoutController@login_customer');
+Route::get('/payment', 'App\Http\Controllers\CheckoutController@payment');
+
+
+Route::get('/manage_order', 'App\Http\Controllers\CheckoutController@manage_order');
+Route::get('/view_order/{order_id}', 'App\Http\Controllers\CheckoutController@view_order');
